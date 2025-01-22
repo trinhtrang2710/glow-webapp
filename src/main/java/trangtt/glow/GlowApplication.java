@@ -1,4 +1,4 @@
-package trangtt.glow.glow;
+package trangtt.glow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
