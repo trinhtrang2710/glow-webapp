@@ -1,8 +1,8 @@
 package trangtt.glow.model;
 
-
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "app_user")
