@@ -1,4 +1,4 @@
-package trangtt.glow.glow;
+package trangtt.glow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
