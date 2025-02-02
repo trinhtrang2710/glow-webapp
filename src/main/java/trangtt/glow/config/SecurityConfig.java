@@ -24,7 +24,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private final BCryptPasswordEncoder bCrypt;
+
+    @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+    public SecurityConfig(BCryptPasswordEncoder bCrypt) {
+        this.bCrypt = bCrypt;
+    }
 
     @Override
     @Bean
@@ -35,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
+                .passwordEncoder(bCrypt);
     }
 
     @Bean
@@ -57,8 +64,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
-    @Bean
-    public BCryptPasswordEncoder encoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 }

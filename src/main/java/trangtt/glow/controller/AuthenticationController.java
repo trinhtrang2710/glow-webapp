@@ -26,11 +26,6 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/grantcode")
-    public String grantCode(@RequestParam("code") String code, @RequestParam("scope") String scope, @RequestParam("authuser") String authUser, @RequestParam("prompt") String prompt) {
-      return "";
-    }
-
     @PostMapping("/")
     public ResponseEntity generateToken(@RequestBody LoginUser loginUser) {
 

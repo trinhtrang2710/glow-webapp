@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import trangtt.glow.model.UpdateUser;
 import trangtt.glow.model.User;
-import trangtt.glow.model.UserNotFoundException;
+import trangtt.glow.exception.UserNotFoundException;
 import trangtt.glow.repository.UserRepository;
 import trangtt.glow.service.UserService;
 
@@ -23,11 +23,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bcryptEncoder;
+    private final BCryptPasswordEncoder bcryptEncoder;
+
+    public UserServiceImpl(BCryptPasswordEncoder bcryptEncoder) {
+        this.bcryptEncoder = bcryptEncoder;
+    }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if(user == null){
+        if(user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
